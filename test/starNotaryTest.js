@@ -59,12 +59,12 @@ it("Given a start when a user buys a star, then original owner gets the funds", 
     let originalOwnerBalanceBeforeTransaction = web3.eth.balance(originalOwner);
 
     // Buyer buys the star
-    await instance.buyStar(starID, {from: buyer}); // For 1) we can specify the gas price inside the third argument
+    await instance.buyStar(starID, {from: buyer, value: starPrice}); // For 1) we can specify the gas price inside the third argument
 
     // Grab the original owner balance after the transaction;
     let originalOwnerBalanceAfterTransaction = web3.eth.balance(originalOwner);
 
-    assert.equal(originalOwnerBalanceBeforeTransaction.add(starPrice).toNumber(), originalOwnerBalanceAfterTransaction);
+    assert.equal(originalOwnerBalanceBeforeTransaction.add(starPrice).toNumber(), originalOwnerBalanceAfterTransaction.toNumber());
 })
 
-// Other tests are similar
+
